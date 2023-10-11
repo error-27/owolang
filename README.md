@@ -6,3 +6,11 @@ All instructions are made up of two separate tokens, with a `w` in between, with
 
 ## Data
 All data is stored in an infinite memory strip of 8-bit unsigned integers, just like with brainfuck. A pointer keeps track of what cell you are currently selecting. Some motions may act on cells outside of the currently selected one.
+
+## Tokens
+### Actions
+
+### Motions
+| Token | Effect                                  |
+|-------|-----------------------------------------|
+| `O`   | Apply action to currently selected cell |
