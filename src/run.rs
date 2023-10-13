@@ -12,15 +12,14 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
         match char::from(action) {
             'O' => index = motion,
             '^' => {
-                if strip.len() <= motion {
-                    let mut pushes = motion - (strip.len() - 1);
-                    while pushes > 0 {
-                        strip.push(0);
-                        pushes -= 1;
-                    }
-                }
+                expand_strip(&mut strip, &motion);
 
                 strip[motion] = strip[motion] + 1;
+            },
+            '-' => {
+                expand_strip(&mut strip, &motion);
+
+                strip[motion] = strip[motion] - 1;
             }
             _ => {
                 println!("invalid action: {}", char::from(action));
@@ -42,6 +41,16 @@ fn get_motion(byte: u8, index: &usize) -> usize {
         _ => {
             println!("invalid motion: {}", char::from(byte));
             255
+        }
+    }
+}
+
+fn expand_strip(strip: &mut Vec<u8>, to: &usize) {
+    if strip.len() <= *to {
+        let mut pushes = to - (strip.len() - 1);
+        while pushes > 0 {
+            strip.push(0);
+            pushes -= 1;
         }
     }
 }
