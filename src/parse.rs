@@ -25,7 +25,7 @@ fn convert_owos(input: String) -> Vec<[u8; 2]> {
     let tokens = trimmed.trim().split(" ");
     for token in tokens {
         //println!("{}", token);
-        let mut byte_pair = token.as_bytes();
+        let byte_pair = token.as_bytes();
         converted.push(byte_pair.try_into().expect("malformed owo"));
     }
 
