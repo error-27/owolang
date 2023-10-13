@@ -1,6 +1,7 @@
 use std::io::{Result, Lines, BufReader, BufRead};
 use std::path::Path;
 use std::fs::File;
+use std::process::exit;
 
 pub fn prepare_file<P>(filename: P) -> Vec<[u8; 2]>
     where P: AsRef<Path>, {
@@ -21,12 +22,16 @@ pub fn prepare_file<P>(filename: P) -> Vec<[u8; 2]>
 fn convert_owos(input: String) -> Vec<[u8; 2]> {
     let mut converted: Vec<[u8; 2]> = Vec::new();
     
-    let trimmed = input.replace("w", "");
-    let tokens = trimmed.trim().split(" ");
+    let tokens = input.trim().split(" ");
     for token in tokens {
-        //println!("{}", token);
-        let byte_pair = token.as_bytes();
-        converted.push(byte_pair.try_into().expect("malformed owo"));
+        // Enforce OwO notation
+        if token.len() != 3 || token.chars().nth(1).unwrap() != 'w' {
+            println!("malformed owo: {}. skipping to next owo...", token);
+            continue;
+        }
+        let no_w = token.replace("w", "");
+        let byte_pair = no_w.as_bytes();
+        converted.push(byte_pair.try_into().expect("owo improperly trimmed or malformed"));
     }
 
     converted

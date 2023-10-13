@@ -9,7 +9,7 @@ fn main() {
 
     let preparsed = parse::prepare_file(path);
 
-    println!("Bytecode:");
+    println!("Bytes:");
     for b in preparsed {
         println!("{} {}", b[0], b[1]);
     }
