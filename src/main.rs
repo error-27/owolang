@@ -1,4 +1,5 @@
 mod parse;
+mod run;
 
 use std::env;
 
@@ -9,8 +10,10 @@ fn main() {
 
     let preparsed = parse::prepare_file(path);
 
-    println!("Bytes:");
-    for b in preparsed {
-        println!("{} {}", b[0], b[1]);
-    }
+    // println!("Bytes:");
+    // for b in &preparsed {
+    //     println!("{} {}", b[0], b[1]);
+    // }
+
+    run::run_bytecode(preparsed);
 }
