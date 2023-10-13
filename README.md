@@ -9,8 +9,15 @@ All data is stored in an infinite memory strip of 8-bit unsigned integers, just 
 
 ## Tokens
 ### Actions
+| Token | Effect                                  |
+|-------|-----------------------------------------|
+| `O`   | Select cell |
+| `^`   | Increment cell |
+| `-`   | Decrement cell |
 
 ### Motions
 | Token | Effect                                  |
 |-------|-----------------------------------------|
-| `O`   | Apply action to currently selected cell |
+| `U`   | Apply action to currently selected cell |
+| `O`   | Apply action to next cell |
+| `Q`   | Apply action to previous cell |
