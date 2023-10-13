@@ -1,7 +1,6 @@
 use std::io::{Result, Lines, BufReader, BufRead};
 use std::path::Path;
 use std::fs::File;
-use std::process::exit;
 
 pub fn prepare_file<P>(filename: P) -> Vec<[u8; 2]>
     where P: AsRef<Path>, {
