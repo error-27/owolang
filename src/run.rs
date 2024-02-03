@@ -8,7 +8,7 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
 
     for token in bytecode {
         let action = token[0];
-        let motion = get_motion(token[1], &index);
+        let motion = get_motion(token[1], &index, &strip);
         if motion == 255 {
             continue; // Skip step if motion invalid
         }
@@ -59,11 +59,14 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
     //println!("{}", stringinator);
 }
 
-fn get_motion(byte: u8, index: &usize) -> usize {
+fn get_motion(byte: u8, index: &usize, strip: &Vec<u8>) -> usize {
     match char::from(byte) {
         'U' => *index,
         'O' => index + 1,
         'Q' => index - 1,
+        'p' => index - strip[*index] as usize,
+        'e' => index + strip[*index] as usize,
+        'T' => strip[*index] as usize,
         _ => {
             println!("invalid motion: {}", char::from(byte));
             255

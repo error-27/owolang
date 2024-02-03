@@ -26,3 +26,6 @@ Strings are created by entering **String Mode**. String Mode starts with a timer
 | `U`   | Apply action to currently selected cell |
 | `O`   | Apply action to next cell |
 | `Q`   | Apply action to previous cell |
+| `p`   | Apply action to a cell `x` spaces before the current cell |
+| `e`   | Apply action to a cell `x` spaces after the current cell |
+| `T`   | Apply action to the cell with the index held in the current cell |
