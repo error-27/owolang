@@ -7,6 +7,9 @@ All instructions are made up of two separate tokens, with a `w` in between, with
 ## Data
 All data is stored in an infinite memory strip of 8-bit unsigned integers, just like with brainfuck. A pointer keeps track of what cell you are currently selecting. Some motions may act on cells outside of the currently selected one.
 
+## Strings
+Strings are created by entering **String Mode**. String Mode starts with a timer that determines how long until String Mode ends. It counts down every time an instruction is read, and is initially set to the value referenced by the Motion when String Mode starts. While in String Mode all Action tokens are taken as a character to add to the string, and are added to the string the same number of times as the number in the cell referenced by the Motion. There is only ever one string, and it gets reset when string mode starts.
+
 ## Tokens
 ### Actions
 | Token | Effect                                  |
@@ -14,6 +17,7 @@ All data is stored in an infinite memory strip of 8-bit unsigned integers, just 
 | `O`   | Select cell |
 | `^`   | Increment cell |
 | `-`   | Decrement cell |
+| `U`   | Start string mode |
 
 ### Motions
 | Token | Effect                                  |

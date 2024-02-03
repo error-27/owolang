@@ -36,7 +36,8 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
             },
             'U' => {
                 expand_strip(&mut strip, &motion);
-
+                
+                stringinator = String::new();
                 str_count = strip[motion];
             }
             _ => {
