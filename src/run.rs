@@ -39,6 +39,12 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
                 
                 stringinator = String::new();
                 str_count = strip[motion];
+            },
+            'V' => {
+                expand_strip(&mut strip, &motion);
+                for _ in 0..strip[motion] {
+                    println!("{}", stringinator);
+                }
             }
             _ => {
                 println!("invalid action: {}", char::from(action));
@@ -46,11 +52,11 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
         }
     }
 
-    println!("Data:");
-    for s in strip {
-        println!("{}", s);
-    }
-    println!("{}", stringinator);
+    //println!("Data:");
+    //for s in 0..strip.len() {
+    //    println!("{}: {}", s, strip[s]);
+    //}
+    //println!("{}", stringinator);
 }
 
 fn get_motion(byte: u8, index: &usize) -> usize {

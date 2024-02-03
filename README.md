@@ -18,6 +18,7 @@ Strings are created by entering **String Mode**. String Mode starts with a timer
 | `^`   | Increment cell |
 | `-`   | Decrement cell |
 | `U`   | Start string mode |
+| `V`   | Print out The String the number of times in the referenced cell |
 
 ### Motions
 | Token | Effect                                  |
