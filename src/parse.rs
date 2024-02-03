@@ -28,7 +28,8 @@ fn convert_owos(input: String) -> Vec<[u8; 2]> {
             println!("malformed owo: {}. skipping to next owo...", token);
             continue;
         }
-        let no_w = token.replace("w", "");
+        let mut t_chars = token.chars();
+        let no_w = format!("{}{}", t_chars.nth(0).unwrap(), t_chars.nth(1).unwrap());
         let byte_pair = no_w.as_bytes();
         converted.push(byte_pair.try_into().expect("owo improperly trimmed or malformed"));
     }
