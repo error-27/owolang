@@ -6,7 +6,10 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
     let mut str_count: u8 = 0;
     let mut stringinator: String = String::new();
 
-    for token in bytecode {
+    let mut i: usize = 0;
+
+    while i < bytecode.len() {
+        let token = bytecode[i];
         let action = token[0];
         let motion = get_motion(token[1], &index, &strip);
         if motion == 255 {
@@ -19,6 +22,7 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
                 stringinator = format!("{}{}", stringinator, char::from(action));
             }
             str_count -= 1;
+            i += 1;
             continue;
         }
 
@@ -45,11 +49,46 @@ pub fn run_bytecode(bytecode: Vec<[u8; 2]>) {
                 for _ in 0..strip[motion] {
                     println!("{}", stringinator);
                 }
+            },
+            'T' => {
+                expand_strip(&mut strip, &motion);
+                
+                if strip[motion] == 0 {
+                    i += 1;
+                    continue;
+                } else {
+                    i += 2;
+                    continue;
+                }
+            },
+            'Q' => {
+                expand_strip(&mut strip, &motion);
+
+                if strip[motion] != 0 {
+                    i += 1;
+                    continue;
+                } else {
+                    i += 2;
+                    continue;
+                }
+            },
+            '=' => {
+                expand_strip(&mut strip, &motion);
+
+                i += strip[motion] as usize;
+                continue;
+            },
+            '~' => {
+                expand_strip(&mut strip, &motion);
+
+                i -= strip[motion] as usize;
+                continue;
             }
             _ => {
                 println!("invalid action: {}", char::from(action));
             }
         }
+        i += 1;
     }
 
     //println!("Data:");
