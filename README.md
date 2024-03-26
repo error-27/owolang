@@ -10,6 +10,9 @@ All data is stored in an infinite memory strip of 8-bit unsigned integers, just 
 ## Strings
 Strings are created by entering **String Mode**. String Mode starts with a timer that determines how long until String Mode ends. It counts down every time an instruction is read, and is initially set to the value referenced by the Motion when String Mode starts. While in String Mode all Action tokens are taken as a character to add to the string, and are added to the string the same number of times as the number in the cell referenced by the Motion. There is only ever one string, and it gets reset when string mode starts.
 
+## Control Flow
+Control flow is done through the `T` and `Q` tokens, which act as `if x==0` and `if x!=0` respectively. They do not move the current instruction to an end statement if they fail, however, and instead just move it one instruction ahead. A `=` of `~` token can then be used to make it jump to a different part of the program, which also allows the creation of loops.
+
 ## Tokens
 ### Actions
 | Token | Effect                                  |
@@ -19,6 +22,10 @@ Strings are created by entering **String Mode**. String Mode starts with a timer
 | `-`   | Decrement cell |
 | `U`   | Start string mode |
 | `V`   | Print out The String the number of times in the referenced cell |
+| `T`   | Goes to the next instruction if the referenced cell is 0, else it skips one. Basically `if x == 0` |
+| `Q`   | Goes to the next instruction if the referenced cell is NOT 0, else it skips one. Basically `if x != 0` |
+| `=`   | Jumps forward the number of instructions in the referenced cell |
+| `~`   | Jumps backward the number of instructions in the referenced cell |
 
 ### Motions
 | Token | Effect                                  |
